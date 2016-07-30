@@ -1,13 +1,15 @@
-#Cinder - Instructions
+###
+### Cinder - Instructions
+###
 
 Cinder is a free plug-in script for KODI that allows you to play random TV Episodes from a list of SMB shares.
 It is meant to be highly configurable and provide you a customized level of randomness that fits your taste.
 
 ------------------------------------------------------------------------------------------------------------
 
-##How to Configure Cinder
+--= How to Configure Cinder =-- 
 
-###Prerequisites
+-- Prerequisites --
 
 There are a few prerequisites that Cinder requires to function. 
 The following sections will provide a basic description of how you would setup Cinder to work on the 
@@ -15,7 +17,7 @@ Windows 7 operating system. You can of course use any other operating system and
 by searching the internet. Though the details will vary the concepts described below will be the same. 
 
 
-**Static IP Address**
+- Static IP Address -
 
 Cinder is designed to pull files from SMB shares that contain your media (more on that later). 
 The SMB shares need to be provided by a computer that resides on somewhere on your local network.
@@ -45,7 +47,7 @@ Default gateway: 192.168.1.1
 This is a one time operation and only the media server needs a Static IP Address. The clients can use DHCP.
 
 
-**SMB Shares** 
+- SMB Shares -
 
 A SMB Share is a fancy name for a shared folder in Windows 7. By setting up SMB Shares on your media server
 KODI clients will be able to access your TV Shows over your network. Your media server will stream the file
@@ -71,9 +73,33 @@ You only need to do this once.
 ------------------------------------------------------------------------------------------------------------
 
 
-##Configuring the Cinder Plug-in
+-- Configuring the Cinder Plug-in --
 
-###Making a big Cinder Button
+- "Run Cinder from here" context menu option -
+
+If you right-click on a TV Show series title you will see a pop-up menu. One of the options is
+"Run Cinder from here". If you click on it Cinder will run from that level and deeper. Doing so will not alter
+your configuration in any way and will provide you a quick way to randomly watch a specific show or season.
+This can be done for any TV Show series either inside or outside of your configured sources.
+Basically anything in your library can be randomized without any configuration.
+
+For example if you were to click "Run Cinder from here" for a show title Cinder will randomly select 
+episodes from all season folders below it for only that show.
+Suppose you drill deeper by first clicking on the show title and then right-click "Season 1" followed
+by "Run Cinder from here". In this case Cinder will randomly queue up episodes from only Season 1
+of the given show.
+
+Some of your configured options will still apply. 
+
+Namely, Your Queue length will be the same (if it's set to 10 you will still get 10 episodes queued up).
+Select episodes from: All videos, Watched, and Unwatched will still apply as well.
+Bootstrap playback will still apply. If enabled Cinder will start playback as soon as possible.
+
+The rest of the options including your sources and weights will be ignored because you are effectively
+overriding them by using the "Run Cinder from here" context menu option.
+
+
+- Making a big Cinder Button -
 
 I'm lazy.. If your anything like me you want a big button called Cinder that you click on once 
 to do everything and start playing TV episodes. Here is how to do that.
@@ -84,7 +110,7 @@ under the Home page Videos submenu. Click on the Cinder plug-in. All done, you n
 You'll find it when you hover over "TV SHOWS" on the main screen.
 
 
-###Configuring Cinder
+- Configuring Cinder -
 
 Cinder is extremely flexible which we will see as we configure the plug-in. To get to the Cinder configuration
 
@@ -92,25 +118,25 @@ On the KODI client that has Cinder installed hover over "SYSTEM" and click "Sett
 You will find Cinder under "My add-ons" -> "All". Click on "Cinder" once you find it then click the 
 "Configure" button. Here is where you will configure Cinder.
 
-####General Tab 
+  - General Tab -
 
   The General tab contains overall settings.
 
-  **Select episodes from** - you can pick one of All videos / Watched / Unwatched
+  Select episodes from - you can pick one of All videos / Watched / Unwatched
             All videos - Cinder will pick any episode regardless of it being watched or not
                Watched - Cinder will only pick episodes that you have previously watched
              Unwatched - Cinder will only pick episodes that you have not previously watched
 
-  **Queue length** - You can pick how many random TV episodes that Cinder will queue up and play every time
+  Queue length - You can pick how many random TV episodes that Cinder will queue up and play every time
                  you click your big Cinder button
 
-  **Shuffle episodes** - If enabled Cinder will play the episodes in random order if not they will be in order
+  Shuffle episodes - If enabled Cinder will play the episodes in random order if not they will be in order
                      of your SMB shares.
 
-  **Can skip sources** - If enabled Cinder will randomly skip SMB shares. This will increase randomness more
+  Can skip sources - If enabled Cinder will randomly skip SMB shares. This will increase randomness more
                      since there is a 50% chance that a given SMB share will be skipped.
 
-  **Bootstrap playback** - If enabled Cinder will start playing an episode as soon as it finds one. It will
+  Bootstrap playback - If enabled Cinder will start playing an episode as soon as it finds one. It will
                        continue to randomly populate your playlist in the background. This allows you to
                        start watching something while you wait. I'm impatiently lazy and this helps.
                        A queue of 100 episodes can take around 8 minutes to fully populate. 
@@ -120,7 +146,7 @@ You will find Cinder under "My add-ons" -> "All". Click on "Cinder" once you fin
                        at an empty screen waiting.
 
 
-####Sources / More Sources Tab
+  - Sources / More Sources Tab -
 
   In the Sources tabs you can specify up to 20 SMB shares to pick episodes from. The reasoning here is that
   not all TV shows are equal. You probably just want to pick from your favorites and not queue up stuff from
@@ -129,28 +155,27 @@ You will find Cinder under "My add-ons" -> "All". Click on "Cinder" once you fin
   file by writing some simple python to add to 2 lists. There are comments in that script that give an
   example for how to do it.
 
-  **Source folder** - Here you add your smb share address. For example I have a folder "Rick and Morty" in my
+  Source folder - Here you add your smb share address. For example I have a folder "Rick and Morty" in my
                   "TV Shows" shared folder. Recall my media server Static IP Address is 192.168.1.10
                   I would type in smb://192.168.1.10/TV Shows/Rick and Morty 
 
-  **Source weight** - Suppose that there are shows that would be nice to see once in a while and others that
+  Source weight - Suppose that there are shows that would be nice to see once in a while and others that
                   are your favorites and would like to see much more. Here is where the source weight
                   slider comes in handy. You can pick the percentage of time a show would be picked from
                   the given source. 1 means 1% and 100 means 100%. Now you can weight your sources and
                   still maintain complete randomness.
 
 
-------------------------------------------------------------------------------------------------------------
 
-##Extra Stuff
+--= Extra Stuff =-- 
 
-###What is Cinder doing under the hood?
+-- What is Cinder doing under the hood? --
 
 It's randomly populating KODI's native playlist with files from your SMB share(s) and starting it. 
 Nothing more nothing less.
 
 
-###For the Brave
+-- For the Brave --
 
 One nice thing about using SMB shares is that you can play anything think: Movies, concerts, music videos,
 home videos, mp3's, etc.
